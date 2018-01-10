@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="app" class="content">
+            <el-container>
+                <el-header><h1>JavaScript RisingStar 2017 DeathStar</h1></el-header>
+                <el-main>
+                    <el-row>
+                        <el-col :span="12"><div class="grid-content bg-purple">
+                            <h2>Circle Color Picker</h2>
+                            <photoshop-picker v-model="circleColor" />
+                        </div></el-col>
+                        <el-col :span="12"><div class="grid-content bg-purple-light">
+                            <h2>Background Color Picker</h2>
+                            <photoshop-picker v-model="backgroundColor" />
+                        </div></el-col>
+                    </el-row>
+                </el-main>
+            </el-container>
+
+            <el-row>
+                <el-col :span="12">
+                    <el-container>
+                        <el-header><h1>Data Source</h1></el-header>
+                        <el-main>
+                            <el-radio v-model="dataSourcePicker" label="2017" border>2017</el-radio>
+                            <el-radio v-model="dataSourcePicker" label="2016" border>2016</el-radio>
+                        </el-main>
+                    </el-container>
+                </el-col>
+                <el-col :span="12">
+                    <el-container>
+                        <el-header><h1>Show All or Featured tag list</h1></el-header>
+                        <el-main>
+                            <el-radio v-model="allOrFeatured" label="all" border>All</el-radio>
+                            <el-radio v-model="allOrFeatured" label="featured" border>Featured</el-radio>
+                        </el-main>
+                    </el-container>
+                </el-col>
+            </el-row>
+
+            <el-row>
+                <el-col :span="12">
+                    <el-container>
+                        <el-header><h1>Circle Size (Use data by)</h1></el-header>
+                        <el-main>
+                            <el-radio v-model="sumBy" label="delta" border>Delta</el-radio>
+                            <el-radio v-model="sumBy" label="stars" border>Stars</el-radio>
+                        </el-main>
+                    </el-container>
+                </el-col>
+                <el-col :span="12">
+                    <el-container>
+                        <el-header><h1>If Add RisingStar2017 Logo</h1></el-header>
+                        <el-main>
+                            <el-radio v-model="ifAddLogo" label="add" border>Add Logo</el-radio>
+                            <el-radio v-model="ifAddLogo" label="noAdd" border>No Logo</el-radio>
+                    </el-container>
+                </el-col>
+            </el-row>
+
+            <el-container>
+                <el-header><h1>Export as Png</h1></el-header>
+                <el-main>
+                    <el-button type="info"  @click="save">Export As PNG</el-button>
+                </el-main>
+            </el-container>
+
+            <div>
+                <svg id="d3" width="980" height="980" font-family="sans-serif"
+                     font-size="10" text-anchor="middle"></svg>
+            </div>
+
+	      </div>
+        <script src="js/main.js"></script>
+    </body>
+</html>
