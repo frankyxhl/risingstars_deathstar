@@ -54,7 +54,7 @@ const app = new Vue({
     },
     data: {
         dataSourcePicker: "2017",
-        allOrFeatured: "featured",
+        allOrFeatured: "all",
         // sumBy: Default use delta, another choice is "stars"
         // This decides circle's radis
         sumBy: "delta",
@@ -68,17 +68,16 @@ const app = new Vue({
         filterWord: null,
         highlightWord: null
     },
-    // computed:{
-    //     projects(){
-    //         const getDataByChosenYear = R.prop(this.dataSourcePicker, dataSource)
-    //         return new ProjectsData(getDataByChosenYear).filterInFeaturedTagList().value()
-    //     }
-    // },
+    computed:{
+        tags(){
+            const getDataByChosenYear = R.prop(this.dataSourcePicker, dataSource)
+            return new ProjectsData(getDataByChosenYear).uniqueTagList()
+        }
+    },
     created(){
         this.render()
         document.body.style.backgroundColor = this.backgroundColor.hex
     },
-
     watch: {
         circleColor(color) {
             new D3Nodes().changeBackgroundColor(color.hex)
@@ -100,6 +99,9 @@ const app = new Vue({
         }
     },
     methods: {
+        chosen(tagName){
+            return  tagName === this.highlightWord ? "success" : ""
+        },
         render(){
             const getDataByChosenYear = R.prop(this.dataSourcePicker, dataSource)
             let data = new ProjectsData(getDataByChosenYear)
@@ -109,8 +111,14 @@ const app = new Vue({
             if (this.ifAddLogo === "add"){
                 data.addRisingStarsLogo(risingStarLogo)
             }
-            new D3Nodes(data.value()).render(this.circleColor.hex, this.sumBy)
+            let ifHighlight = false
+            if (this.highlightWord){
+                ifHighlight = true
+                data.highlightByTagName(this.highlightWord)
+            }
+            new D3Nodes(data.value()).render(this.circleColor.hex, this.sumBy, ifHighlight)
         },
+        // Not used right now
         filterData(tagName){
             this.filterWord = tagName
             this.render()

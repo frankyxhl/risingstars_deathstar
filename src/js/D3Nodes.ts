@@ -35,7 +35,7 @@ class D3Nodes{
         return this
     }
 
-    draw(color, sumWord, filterWord){
+    draw(color, sumWord, ifHighlight){
         const data = R.clone(this.projects)
 
         const sumBy = R.prop(sumWord)
@@ -70,7 +70,7 @@ class D3Nodes{
             .text(function(d) {
                 return d.data.name + "\n" + sumBy(d.data) +" stars in 2017"; })
 
-        const drawImageNode = filterWord
+        const drawImageNode = ifHighlight
             ? node.filter(d => d.data.notHighlight)
             : node
 
@@ -93,9 +93,9 @@ class D3Nodes{
         return this
     }
 
-    render(color, sumWord="delta", filterWord=null){
+    render(color, sumWord="delta", ifHighlight=null){
         this.removeAll()
-            .draw(color, sumWord, filterWord)
+            .draw(color, sumWord, ifHighlight)
         return this
     }
 

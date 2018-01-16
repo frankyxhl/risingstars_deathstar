@@ -30,7 +30,7 @@
                 </el-col>
                 <el-col :span="12">
                     <el-container>
-                        <el-header><h1>Show All or Featured tag list</h1></el-header>
+                        <el-header><h1>Show All Projects or Featured in article</h1></el-header>
                         <el-main>
                             <el-radio v-model="allOrFeatured" label="all" border>All</el-radio>
                             <el-radio v-model="allOrFeatured" label="featured" border>Featured</el-radio>
@@ -60,9 +60,21 @@
             </el-row>
 
             <el-container>
+                <el-header><h1>Highlight by Tags</h1></el-header>
+                <el-main>
+                    <el-button type="primary"  @click="highlightData(null)" >Show All</el-button>
+                    <el-button :type="chosen(tag)"
+                               v-for="tag in tags"
+                               :key="tag"
+                               @click="highlightData(tag)" >{{tag}}</el-button>
+                </el-main>
+            </el-container>
+
+
+            <el-container>
                 <el-header><h1>Export as Png</h1></el-header>
                 <el-main>
-                    <el-button type="info"  @click="save">Export As PNG</el-button>
+                    <el-button type="info" @click="save">Export As PNG</el-button>
                 </el-main>
             </el-container>
 

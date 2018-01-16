@@ -67,6 +67,14 @@ class ProjectsData{
         return this.instance
     }
 
+    uniqueTagList(){
+        return R.pipe(
+            R.pluck("tags"),
+            R.flatten,
+            R.uniq
+        )(this.instance)
+    }
+
 }
 
 
